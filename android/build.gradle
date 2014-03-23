@@ -10,6 +10,8 @@ int versionBuild = 1 // bump for dogfood builds, public betas, etc.
 apply plugin: 'android'
 
 dependencies {
+    compile project(':core')
+
     compile 'com.netflix.rxjava:rxjava-android:0.17.+'
     compile 'com.novoda:notils:2.2.5'
     compile 'com.novoda.imageloader:imageloader-core:1.6.1'

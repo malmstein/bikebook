@@ -1,0 +1,47 @@
+apply plugin: 'java'
+
+dependencies {
+    compile 'com.github.kevinsawicki:http-request:5.5'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.squareup.okhttp:okhttp:1.5.+'
+    compile 'com.google.guava:guava:16.0.+'
+    compile 'com.netflix.rxjava:rxjava-core:0.17.+'
+
+    testCompile 'junit:junit:4.+'
+    testCompile 'com.squareup:fest-android:1.0.+'
+    testCompile 'com.squareup.okhttp:mockwebserver:1.5.+'
+    testCompile 'org.mockito:mockito-all:1.8.+'
+}
+
+configurations {
+    provided
+}
+
+dependencies {
+    provided 'com.google.auto.value:auto-value:1.0-rc1'
+}
+
+//Include provided for compilation
+sourceSets.main.compileClasspath += configurations.provided
+
+test {
+    testLogging {
+        events 'passed'
+    }
+    useJUnit {
+        excludeCategories 'com.malmstein.bikebook.api.LiveTests'
+    }
+}
+
+/**
+ * Runs the tests against the backend endpoints.
+ * These are categorized/tagged by the LiveTests category.
+ */
+task endpointTest(type: Test, dependsOn: testClasses) {
+    testLogging {
+        events 'started', 'passed'
+    }
+    useJUnit {
+        includeCategories 'com.malmstein.bikebook.api.LiveTests'
+    }
+}
