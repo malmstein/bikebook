@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.malmstein.bikebook.http.OkConnectionFactory;
 import com.malmstein.bikebook.http.SawickiHttpClient;
+import com.malmstein.bikebook.json.GsonJsonReader;
 import com.novoda.notils.logger.simple.Log;
 import com.squareup.okhttp.HttpResponseCache;
 import com.squareup.okhttp.OkHttpClient;
@@ -18,6 +19,7 @@ public class BikeBookApplication extends Application {
     private static Context context;
 
     private SawickiHttpClient httpClient;
+    private GsonJsonReader jsonReader;
 
     @Override
     public void onCreate() {
@@ -25,9 +27,9 @@ public class BikeBookApplication extends Application {
         context = this;
 
         initHttp();
+        initJsonReader();
 
 
-        // better let the http client accept a log level, so we do not need to leak the logger name here
         Logger.getLogger("").setLevel(android.util.Log.isLoggable("http", android.util.Log.DEBUG) ? Level.FINE : Level.INFO);
     }
 
@@ -44,5 +46,9 @@ public class BikeBookApplication extends Application {
             Log.e("unable to set http cache", e);
         }
         return okHttpClient;
+    }
+
+    private void initJsonReader(){
+        jsonReader = new GsonJsonReader();
     }
 }
