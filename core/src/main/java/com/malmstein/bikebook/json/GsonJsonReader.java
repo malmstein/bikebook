@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.malmstein.bikebook.model.Bike;
+import com.malmstein.bikebook.json.responses.Bike;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

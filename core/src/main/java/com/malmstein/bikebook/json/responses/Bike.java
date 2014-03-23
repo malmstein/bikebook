@@ -1,4 +1,4 @@
-package com.malmstein.bikebook.model;
+package com.malmstein.bikebook.json.responses;
 
 import com.google.gson.annotations.SerializedName;
 
