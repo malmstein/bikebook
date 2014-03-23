@@ -70,6 +70,11 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="imageloader-core-1.6.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="android-espresso-bundled-1.1.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="rxjava-core-0.17.1" level="project" />
+    <orderEntry type="library" exported="" name="rxjava-android-0.17.1" level="project" />
+    <orderEntry type="library" exported="" name="notils-2.2.5" level="project" />
   </component>
 </module>
 

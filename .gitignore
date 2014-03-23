@@ -37,6 +37,7 @@ tmp/
 
 # Android
 local.properties
+deploy.properties
 
 # MAC
 *.DS_Store
@@ -55,7 +56,7 @@ terminator/
 
 .gradle/
 
-app/build/
+android/build/
 build/
 core/build/
 
@@ -98,3 +99,4 @@ core/build/
 *.sublime-*
 google_play_services/build/
 .gradletasknamecache
+/team-props/bikebook.jks
