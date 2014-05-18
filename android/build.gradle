@@ -11,6 +11,8 @@ apply plugin: 'android'
 
 dependencies {
     compile project(':core')
+
+    compile 'com.novoda:notils:2.2.5'
 }
 
 Properties props = new Properties()
