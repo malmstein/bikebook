@@ -1,8 +1,8 @@
 package com.malmstein.bikebook.api;
 
 import com.malmstein.bikebook.json.GsonJsonReader;
-import com.malmstein.bikebook.json.responses.BikeDetail;
-import com.malmstein.bikebook.json.responses.Year;
+import com.malmstein.bikebook.json.responses.BikeDetailJson;
+import com.malmstein.bikebook.json.responses.YearJson;
 import com.malmstein.bikebook.util.HttpClientUtil;
 import com.malmstein.bikebook.util.JsonHelper;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -25,10 +25,10 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_BIKE_DETAIL);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final BikeDetail bikeDetail = api.getBike(serverUrl.toString(), "Fuji", "2014", "outland_29_1_3");
-        assertThat(bikeDetail).isNotNull();
-        assertThat(bikeDetail.getBike().getManufacturer()).isEqualTo("Fuji");
-        assertThat(bikeDetail.getBike().getYear()).isEqualTo(2014);
+        final BikeDetailJson bikeDetailJson = api.getBike(serverUrl.toString(), "Fuji", "2014", "outland_29_1_3");
+        assertThat(bikeDetailJson).isNotNull();
+        assertThat(bikeDetailJson.getBike().getManufacturer()).isEqualTo("Fuji");
+        assertThat(bikeDetailJson.getBike().getYear()).isEqualTo(2014);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_MANUFACTURER);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final Map<String, List<Year>> manufacturer = api.getManufacturer(serverUrl.toString(), "Cinelli");
+        final Map<String, List<YearJson>> manufacturer = api.getManufacturer(serverUrl.toString(), "Cinelli");
         assertThat(manufacturer).isNotNull();
         assertThat(manufacturer.size()).isEqualTo(2);
     }
@@ -46,9 +46,9 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_YEAR);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final List<Year> year = api.getManufacturerByYear(serverUrl.toString(), "Cinelli", "2014");
-        assertThat(year).isNotNull();
-        assertThat(year.size()).isEqualTo(22);
+        final List<YearJson> yearJson = api.getManufacturerByYear(serverUrl.toString(), "Cinelli", "2014");
+        assertThat(yearJson).isNotNull();
+        assertThat(yearJson.size()).isEqualTo(22);
     }
 
     @Test
@@ -56,15 +56,15 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_INDEX);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final Map<String, Map<String, List<Year>>> index = api.getIndex(serverUrl.toString());
+        final Map<String, Map<String, List<YearJson>>> index = api.getIndex(serverUrl.toString());
         assertThat(index).isNotNull();
         assertThat(index.size()).isEqualTo(2);
 
-//        for (Map.Entry<String, Map<String, List<Year>>> entry : index.entrySet()) {
-//            String key = entry.getKey();
-//            Map<String, List<Year>> tab = entry.getValue();
-//            // do something with key and/or tab
-//        }
+        for (Map.Entry<String, Map<String, List<YearJson>>> entry : index.entrySet()) {
+            String key = entry.getKey();
+            Map<String, List<YearJson>> tab = entry.getValue();
+            // do something with key and/or tab
+        }
 
     }
 

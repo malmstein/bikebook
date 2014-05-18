@@ -2,7 +2,7 @@ package com.malmstein.bikebook.json.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Year {
+public class YearJson {
 
     @SerializedName("id")
     private String id;
@@ -36,7 +36,7 @@ public class Year {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Year other = (Year) obj;
+        final YearJson other = (YearJson) obj;
 
         return com.google.common.base.Objects.equal(this.id, other.id)
                 && com.google.common.base.Objects.equal(this.text, other.text)

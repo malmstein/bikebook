@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class BikeDetail {
+public class BikeDetailJson {
 
     public static class Component {
         @SerializedName("component_type")

@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.malmstein.bikebook.json.responses.BikeDetail;
+import com.malmstein.bikebook.json.responses.BikeDetailJson;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,16 +15,16 @@ import java.util.logging.Logger;
 
 public final class GsonJsonReader implements JsonReader {
 
-    private static class ImageResizedAdapter implements JsonDeserializer<BikeDetail> {
+    private static class ImageResizedAdapter implements JsonDeserializer<BikeDetailJson> {
 
         private Gson gson = new Gson();
 
         @Override
-        public BikeDetail deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        public BikeDetailJson deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             if (!json.isJsonObject()) {
                 return null;
             }
-            return gson.fromJson(json, BikeDetail.class);
+            return gson.fromJson(json, BikeDetailJson.class);
         }
     }
 
@@ -63,7 +63,7 @@ public final class GsonJsonReader implements JsonReader {
     }
 
     private static GsonBuilder createGsonBuilder() {
-        return new GsonBuilder().registerTypeAdapter(BikeDetail.class, new ImageResizedAdapter());
+        return new GsonBuilder().registerTypeAdapter(BikeDetailJson.class, new ImageResizedAdapter());
     }
 
 }
