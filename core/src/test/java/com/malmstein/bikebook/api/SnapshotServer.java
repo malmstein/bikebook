@@ -66,7 +66,7 @@ public class SnapshotServer {
     }
 
     private String readFile(final String path) throws IOException {
-        InputStream resourceAsStream = BackendApiTest.class.getResourceAsStream(snapshotDir + path);
+        InputStream resourceAsStream = BikeBookApiTest.class.getResourceAsStream(snapshotDir + path);
         InputStreamReader reader = new InputStreamReader(resourceAsStream);
         BufferedReader buffered = new BufferedReader(reader);
         String line;
