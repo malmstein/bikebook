@@ -7,9 +7,8 @@ import com.malmstein.bikebook.json.JsonReader;
 import com.malmstein.bikebook.json.requests.GetBikeRequest;
 import com.malmstein.bikebook.json.requests.GetIndexRequest;
 import com.malmstein.bikebook.json.requests.GetManufacturerRequest;
+import com.malmstein.bikebook.json.requests.GetManufacturerbyYearRequest;
 import com.malmstein.bikebook.json.responses.BikeDetail;
-import com.malmstein.bikebook.json.responses.Index;
-import com.malmstein.bikebook.json.responses.Manufacturer;
 import com.malmstein.bikebook.json.responses.Year;
 
 import java.io.UnsupportedEncodingException;
@@ -17,7 +16,8 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -33,14 +33,19 @@ public class BikeBook {
         this.jsonReader = checkNotNull(jsonReader);
     }
 
-    public Index getIndex(String requestURL) {
+    public Map<String, Map<String, List<Year>>> getIndex(String requestURL) {
         final GetIndexRequest request = new GetIndexRequest();
-        return queryApi(createUrl(requestURL + request.getParams()), request, Index.class);
+        return queryApi(createUrl(requestURL + request.getParams()), request, new TypeToken<Map<String, Map<String, List<Year>>>>() {}.getType());
     }
 
-    public Manufacturer getManufacturer(String requestURL, String manufacturer) {
+    public List<Year> getManufacturerByYear(String requestURL, String manufacturer, String year) {
+        final GetManufacturerbyYearRequest request = new GetManufacturerbyYearRequest(manufacturer, year);
+        return queryApi(createUrl(requestURL + request.getParams()), request, new TypeToken<List<Year>>() {}.getType());
+    }
+
+    public Map<String, List<Year>> getManufacturer(String requestURL, String manufacturer) {
         final GetManufacturerRequest request = new GetManufacturerRequest(manufacturer);
-        return queryApi(createUrl(requestURL + request.getParams()), request, TypeToken.get(new ArrayList<Year>().getClass()).getType());
+        return queryApi(createUrl(requestURL + request.getParams()), request, new TypeToken<Map<String, List<Year>>>() {}.getType());
     }
 
     public BikeDetail getBike(String requestURL, String manufacturer, String year, String frame) {
