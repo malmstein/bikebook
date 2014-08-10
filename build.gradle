@@ -5,7 +5,7 @@ buildscript {
         maven { url "https://github.com/novoda/public-mvn-repo/raw/master/releases" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.2'
     }
 }
 
