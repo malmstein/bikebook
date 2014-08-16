@@ -61,11 +61,9 @@ public class BikeBookApiTest {
         assertThat(index.size()).isEqualTo(2);
 
         for (Map.Entry<String, Map<String, List<ModelJson>>> entry : index.entrySet()) {
-            String key = entry.getKey();
             Map<String, List<ModelJson>> tab = entry.getValue();
             assertThat(tab.size()).isGreaterThan(0);
         }
-
     }
 
     private static URL prepareMockServer(final String response) throws IOException {
