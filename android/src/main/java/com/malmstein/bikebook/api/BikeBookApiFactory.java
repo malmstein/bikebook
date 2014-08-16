@@ -18,9 +18,6 @@ import java.net.URL;
 public class BikeBookApiFactory {
 
     public static BikeBook defaultClient(Context context) throws MalformedURLException {
-
-
-
         return new BikeBook(new URL(context.getString(R.string.base_url)),
                 new SawickiHttpClient(new OkConnectionFactory(createOkHttp(context))),
                 new GsonJsonReader());

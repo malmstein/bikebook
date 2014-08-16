@@ -1,6 +1,10 @@
 package com.malmstein.bikebook.api;
 
+import com.malmstein.bikebook.json.responses.ModelJson;
 import com.malmstein.bikebook.model.Index;
+
+import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Observer;
@@ -31,7 +35,8 @@ public class BikeBookApi {
             @Override
             public void call(final Subscriber<? super Index> subscriber) {
                 try {
-                    Index index = Index.from(backend.getIndex(requestUrl));
+                    Map<String, Map<String, List<ModelJson>>> indexMap = backend.getIndex(requestUrl + "/assets/index.json");
+                    Index index = Index.from(indexMap);
                     if (index != null) {
                         subscriber.onNext(index);
                         subscriber.onCompleted();
