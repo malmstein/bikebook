@@ -28,9 +28,9 @@ public class BikeBook {
     private final URL baseUrl;
     private final JsonReader jsonReader;
 
-    public BikeBook(final URL baseUrl, final HttpClient httpClient, final JsonReader jsonReader) {
+    public BikeBook(final URL baseUrl, final HttpClient httpClient, final JsonReader jsonReader) throws MalformedURLException {
         this.httpClient = checkNotNull(httpClient);
-        this.baseUrl = baseUrl;
+        this.baseUrl = checkNotNull(baseUrl);
         this.jsonReader = checkNotNull(jsonReader);
     }
 

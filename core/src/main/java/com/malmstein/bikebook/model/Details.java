@@ -1,5 +1,6 @@
 package com.malmstein.bikebook.model;
 
+import com.google.auto.value.AutoValue;
 import com.malmstein.bikebook.json.responses.BikeDetailJson;
 import com.malmstein.bikebook.json.responses.ModelJson;
 

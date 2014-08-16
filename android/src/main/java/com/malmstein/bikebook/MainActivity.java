@@ -9,46 +9,48 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.malmstein.bikebook.api.BikeBookAPI;
-import com.malmstein.bikebook.json.responses.IndexResponse;
-import com.malmstein.bikebook.json.responses.ModelJson;
+import com.malmstein.bikebook.api.BikeBookApi;
+import com.malmstein.bikebook.api.BikeBookApiFactory;
+import com.malmstein.bikebook.model.Index;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.net.MalformedURLException;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 
-import ly.apps.android.rest.client.Callback;
-import ly.apps.android.rest.client.Response;
-import ly.apps.android.rest.client.RestClient;
-import ly.apps.android.rest.client.RestClientFactory;
-import ly.apps.android.rest.client.RestServiceFactory;
+public class MainActivity extends Activity implements Observer<Index> {
 
-public class MainActivity extends Activity {
-
-    BikeBookAPI api;
+    BikeBookApi api;
+    Index localIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RestClient client = RestClientFactory.defaultClient(getApplicationContext());
-        api = RestServiceFactory.getService(getString(R.string.base_url), BikeBookAPI.class, client);
-        api.getIndex(new Callback<IndexResponse>() {
-            @Override
-            public void onResponse(Response<IndexResponse> indexResponse) {
-                String data = indexResponse.getRawData();
-                try {
-                    Map<String, Map<String, List<ModelJson>>> result = new ObjectMapper().readValue("{\"root\":" + data + "}", Map.class);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                };
-            }
-        });
+        try {
+            api = new BikeBookApi(BikeBookApiFactory.defaultClient(getApplicationContext()), AndroidSchedulers.mainThread(), getString(R.string.base_url));
+            api.getIndex(this);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    @Override
+    public void onCompleted() {
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onNext(Index index) {
+        localIndex = index;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

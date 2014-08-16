@@ -2,6 +2,8 @@ package com.malmstein.bikebook.model;
 
 import com.malmstein.bikebook.json.responses.BikeDetailJson;
 
+import com.google.auto.value.AutoValue;
+
 @AutoValue
 public abstract class Component {
 

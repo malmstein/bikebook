@@ -12,10 +12,7 @@ apply plugin: 'android'
 dependencies {
     compile project(':core')
     compile 'com.novoda:notils:2.2.5'
-    compile('ly.apps:android-rest:1.2.1-SNAPSHOT@aar') {
-        transitive = true
-        changing = true
-    }
+    compile 'com.netflix.rxjava:rxjava-android:0.17.+'
 }
 
 Properties props = new Properties()

@@ -5,6 +5,8 @@ import com.malmstein.bikebook.json.responses.BikeDetailJson;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.auto.value.AutoValue;
+
 @AutoValue
 public abstract class Bike {
 
