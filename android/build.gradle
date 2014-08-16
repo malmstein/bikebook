@@ -11,8 +11,11 @@ apply plugin: 'android'
 
 dependencies {
     compile project(':core')
-
     compile 'com.novoda:notils:2.2.5'
+    compile('ly.apps:android-rest:1.2.1-SNAPSHOT@aar') {
+        transitive = true
+        changing = true
+    }
 }
 
 Properties props = new Properties()
@@ -25,18 +28,13 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-
-        versionCode versionMajor * 100**3 + versionMinor * 100**2 + versionPatch * 100 + versionBuild
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-
+        testInstrumentationRunner 'com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner'
         buildConfigField 'String', 'GIT_SHA', '"' + gitSha + '"'
         buildConfigField 'String', 'BUILD_TIME', '"' + buildTime + '"'
-
     }
 
     signingConfigs {
-        dchRelease {
+        bikeRelease {
             storeFile file('../team-props/bikebook.jks')
             storePassword props['signing.release.storePassword']
             keyAlias props['signing.release.keyAlias']
@@ -46,14 +44,18 @@ android {
 
     buildTypes {
         debug {
-            packageNameSuffix '.dev'
+            applicationIdSuffix '.dev'
             versionNameSuffix '-dev'
         }
         release {
-            runProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../team-props/proguard.cfg'
-            signingConfig signingConfigs.dchRelease
+            runProguard false
+            signingConfig signingConfigs.bikeRelease
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
