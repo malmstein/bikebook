@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class IndexResponse {
 
-    public Map<String, Map<String, List<YearJson>>> index;
+    public Map<String, Map<String, List<ModelJson>>> index;
 
-    public void setIndex(Map<String, Map<String, List<YearJson>>> index) {
+    public void setIndex(Map<String, Map<String, List<ModelJson>>> index) {
         this.index = index;
     }
 
-    public Map<String, Map<String, List<YearJson>>> getIndex() {
+    public Map<String, Map<String, List<ModelJson>>> getIndex() {
         return index;
     }
 }

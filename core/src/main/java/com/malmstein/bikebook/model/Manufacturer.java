@@ -1,9 +1,8 @@
 package com.malmstein.bikebook.model;
 
 import com.google.auto.value.AutoValue;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -19,18 +18,22 @@ public abstract class Manufacturer {
         return new AutoValue_Manufacturer(name, modelList);
     }
 
-    public static Manufacturer from (Map.Entry<String, Map<String, List<YearJson>>> manufacturerEntry){
+    public static Manufacturer from (Map.Entry<String, Map<String, List<ModelJson>>> manufacturerEntry){
         return Manufacturer.create(manufacturerEntry.getKey(), createYears(manufacturerEntry.getValue()));
     }
 
-    private static List<Year> createYears(final Map<String, List<YearJson>> years) {
-        if (years == null) {
+    private static List<Year> createYears(final Map<String, List<ModelJson>> yearsMap) {
+        if (yearsMap == null) {
             return Collections.emptyList();
         }
 
-        List<Year> results = Collections.emptyList();
+        List<Year> years = Collections.emptyList();
 
-        return Collections.unmodifiableList(results);
+        for (Map.Entry<String, List<ModelJson>> entry : yearsMap.entrySet()) {
+            years.add(Year.from(entry));
+        }
+
+        return Collections.unmodifiableList(years);
     }
 
 

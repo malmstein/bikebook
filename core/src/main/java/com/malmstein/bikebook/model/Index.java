@@ -1,7 +1,7 @@
 package com.malmstein.bikebook.model;
 
 import com.google.auto.value.AutoValue;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 
 import java.util.*;
 
@@ -15,11 +15,11 @@ public abstract class Index {
         return new AutoValue_Index(manufacturerList);
     }
 
-    public static Index from(Map<String, Map<String, List<YearJson>>> index) {
+    public static Index from(Map<String, Map<String, List<ModelJson>>> index) {
 
         List<Manufacturer> manufacturers = Collections.emptyList();
 
-        for (Map.Entry<String, Map<String, List<YearJson>>> entry : index.entrySet()) {
+        for (Map.Entry<String, Map<String, List<ModelJson>>> entry : index.entrySet()) {
             manufacturers.add(Manufacturer.from(entry));
         }
 

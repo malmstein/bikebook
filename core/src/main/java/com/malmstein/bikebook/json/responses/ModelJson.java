@@ -1,16 +1,9 @@
 package com.malmstein.bikebook.json.responses;
 
-
-
-public class YearJson {
-
+public class ModelJson {
 
     private String id;
-
-
     private String text;
-
-
     private String name;
 
     public String getId() { return id; }
@@ -36,7 +29,7 @@ public class YearJson {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final YearJson other = (YearJson) obj;
+        final ModelJson other = (ModelJson) obj;
 
         return com.google.common.base.Objects.equal(this.id, other.id)
                 && com.google.common.base.Objects.equal(this.text, other.text)

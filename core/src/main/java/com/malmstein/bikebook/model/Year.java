@@ -1,7 +1,7 @@
 package com.malmstein.bikebook.model;
 
 import com.google.auto.value.AutoValue;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +18,11 @@ public abstract class Year {
         return new AutoValue_Year(yearName, modelList);
     }
 
-    public static Year from (Map.Entry<String, List<YearJson>> yearEntry){
+    public static Year from(Map.Entry<String, List<ModelJson>> yearEntry) {
         String year = yearEntry.getKey();
         List<Model> modelList = Collections.emptyList();
-        for (YearJson yearJsons : yearEntry.getValue()) {
-            modelList.add(Model.from(yearJsons));
+        for (ModelJson modelJsons : yearEntry.getValue()) {
+            modelList.add(Model.from(modelJsons));
         }
         return create(year, modelList);
     }

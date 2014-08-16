@@ -1,7 +1,7 @@
 package com.malmstein.bikebook.model;
 
 import com.google.auto.value.AutoValue;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 
 @AutoValue
 public abstract class Model {
@@ -14,8 +14,8 @@ public abstract class Model {
         return new AutoValue_Model(id, name);
     }
 
-    public static Model from(YearJson yearJson){
-        return create(yearJson.getId(), yearJson.getName());
+    public static Model from(ModelJson modelJson){
+        return create(modelJson.getId(), modelJson.getName());
     }
 
 }

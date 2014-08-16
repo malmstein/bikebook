@@ -2,7 +2,7 @@ package com.malmstein.bikebook.api;
 
 import com.malmstein.bikebook.json.GsonJsonReader;
 import com.malmstein.bikebook.json.responses.BikeDetailJson;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 import com.malmstein.bikebook.util.HttpClientUtil;
 import com.malmstein.bikebook.util.JsonHelper;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -36,7 +36,7 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_MANUFACTURER);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final Map<String, List<YearJson>> manufacturer = api.getManufacturer(serverUrl.toString(), "Cinelli");
+        final Map<String, List<ModelJson>> manufacturer = api.getManufacturer(serverUrl.toString(), "Cinelli");
         assertThat(manufacturer).isNotNull();
         assertThat(manufacturer.size()).isEqualTo(2);
     }
@@ -46,9 +46,9 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_YEAR);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final List<YearJson> yearJson = api.getManufacturerByYear(serverUrl.toString(), "Cinelli", "2014");
-        assertThat(yearJson).isNotNull();
-        assertThat(yearJson.size()).isEqualTo(22);
+        final List<ModelJson> modelJson = api.getManufacturerByYear(serverUrl.toString(), "Cinelli", "2014");
+        assertThat(modelJson).isNotNull();
+        assertThat(modelJson.size()).isEqualTo(22);
     }
 
     @Test
@@ -56,13 +56,13 @@ public class BikeBookApiTest {
         final URL serverUrl = prepareMockServer(JsonHelper.GET_INDEX);
         final BikeBook api = createJsonApi(serverUrl);
 
-        final Map<String, Map<String, List<YearJson>>> index = api.getIndex(serverUrl.toString());
+        final Map<String, Map<String, List<ModelJson>>> index = api.getIndex(serverUrl.toString());
         assertThat(index).isNotNull();
         assertThat(index.size()).isEqualTo(2);
 
-        for (Map.Entry<String, Map<String, List<YearJson>>> entry : index.entrySet()) {
+        for (Map.Entry<String, Map<String, List<ModelJson>>> entry : index.entrySet()) {
             String key = entry.getKey();
-            Map<String, List<YearJson>> tab = entry.getValue();
+            Map<String, List<ModelJson>> tab = entry.getValue();
             assertThat(tab.size()).isGreaterThan(0);
         }
 

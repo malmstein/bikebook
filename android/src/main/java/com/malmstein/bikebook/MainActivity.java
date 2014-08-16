@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.malmstein.bikebook.api.BikeBookAPI;
 import com.malmstein.bikebook.json.responses.IndexResponse;
-import com.malmstein.bikebook.json.responses.YearJson;
+import com.malmstein.bikebook.json.responses.ModelJson;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
             public void onResponse(Response<IndexResponse> indexResponse) {
                 String data = indexResponse.getRawData();
                 try {
-                    Map<String, Map<String, List<YearJson>>> result = new ObjectMapper().readValue("{\"root\":" + data + "}", Map.class);
+                    Map<String, Map<String, List<ModelJson>>> result = new ObjectMapper().readValue("{\"root\":" + data + "}", Map.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                 };
