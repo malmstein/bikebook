@@ -1,7 +1,6 @@
 package com.malmstein.bikebook;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,20 +8,45 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
+import com.malmstein.bikebook.api.BikeBookAPI;
+import com.malmstein.bikebook.json.responses.IndexResponse;
+import com.malmstein.bikebook.json.responses.YearJson;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import org.codehaus.jackson.map.ObjectMapper;
+
+import ly.apps.android.rest.client.Callback;
+import ly.apps.android.rest.client.Response;
+import ly.apps.android.rest.client.RestClient;
+import ly.apps.android.rest.client.RestClientFactory;
+import ly.apps.android.rest.client.RestServiceFactory;
 
 public class MainActivity extends Activity {
+
+    BikeBookAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
+        RestClient client = RestClientFactory.defaultClient(getApplicationContext());
+        api = RestServiceFactory.getService(getString(R.string.base_url), BikeBookAPI.class, client);
+        api.getIndex(new Callback<IndexResponse>() {
+            @Override
+            public void onResponse(Response<IndexResponse> indexResponse) {
+                String data = indexResponse.getRawData();
+                try {
+                    Map<String, Map<String, List<YearJson>>> result = new ObjectMapper().readValue("{\"root\":" + data + "}", Map.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                };
+            }
+        });
     }
 
 

@@ -1,19 +1,14 @@
 package com.malmstein.bikebook.json.responses;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 
 public class BikeDetailJson {
 
     public static class Component {
-        @SerializedName("component_type")
         private String componentType;
 
-        @SerializedName("description")
         private String description;
 
-        @SerializedName("cgroup")
         private String cgroup;
 
         public String getComponentType() { return componentType; }
@@ -47,38 +42,27 @@ public class BikeDetailJson {
         }
     }
 
-    @SerializedName("components")
     private java.util.ArrayList<Component> components;
 
     public static class Bike {
-        @SerializedName("frame_model")
         private String frameModel;
 
-        @SerializedName("manufacturer")
         private String manufacturer;
 
-        @SerializedName("year")
         private int year;
 
-        @SerializedName("description")
         private String description;
 
-        @SerializedName("paint_description")
         private String paintDescription;
 
-        @SerializedName("manufacturers_url")
         private String manufacturersUrl;
 
-        @SerializedName("rear_wheel_bsd")
         private int rearWheelBsd;
 
-        @SerializedName("rear_tire_narrow")
         private String rearTireNarrow;
 
-        @SerializedName("stock_photo_url")
         private String stockPhoto;
 
-        @SerializedName("stock_photo_small")
         private String stockSmallPhoto;
 
         public String getFrameModel() {
@@ -149,7 +133,6 @@ public class BikeDetailJson {
         }
     }
 
-    @SerializedName("bike")
     private Bike bike;
 
     public ArrayList<Component> getComponents(){

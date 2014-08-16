@@ -20,7 +20,7 @@ public abstract class Manufacturer {
     }
 
     public static Manufacturer from (Map.Entry<String, Map<String, List<YearJson>>> manufacturerEntry){
-        return Manufacturer.create(manufacturerEntry.getKey(), createYears(manufacturerEntry.getValue());
+        return Manufacturer.create(manufacturerEntry.getKey(), createYears(manufacturerEntry.getValue()));
     }
 
     private static List<Year> createYears(final Map<String, List<YearJson>> years) {

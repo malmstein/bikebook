@@ -1,3 +1,4 @@
+
 package com.malmstein.bikebook.api;
 
 import com.google.gson.reflect.TypeToken;
@@ -86,3 +87,4 @@ public class BikeBook {
     }
 
 }
+

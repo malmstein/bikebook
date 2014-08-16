@@ -1,16 +1,16 @@
 package com.malmstein.bikebook.json.responses;
 
-import com.google.gson.annotations.SerializedName;
+
 
 public class YearJson {
 
-    @SerializedName("id")
+
     private String id;
 
-    @SerializedName("text")
+
     private String text;
 
-    @SerializedName("name")
+
     private String name;
 
     public String getId() { return id; }
