@@ -63,7 +63,7 @@ public class BikeBookApiTest {
         for (Map.Entry<String, Map<String, List<YearJson>>> entry : index.entrySet()) {
             String key = entry.getKey();
             Map<String, List<YearJson>> tab = entry.getValue();
-            // do something with key and/or tab
+            assertThat(tab.size()).isGreaterThan(0);
         }
 
     }
